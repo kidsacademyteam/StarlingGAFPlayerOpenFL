@@ -134,7 +134,7 @@ class DebugUtility
 }
 
 
-@:final class FakeClass
+final class FakeClass
 {
 
     @:allow(com.catalystapps.gaf.utils)

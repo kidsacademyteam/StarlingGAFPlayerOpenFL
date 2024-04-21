@@ -10,7 +10,7 @@ class MathUtility
     
     public static var PI_Q : Float = Math.PI / 4.0;
     
-	@:extern inline
+	extern inline
     public static function equals(a : Null<Float>, b : Null<Float>) : Bool
     {
         //if (Math.isNaN(a) || Math.isNaN(b))

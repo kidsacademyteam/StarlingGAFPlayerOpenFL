@@ -235,7 +235,7 @@ class GAFImage extends Image implements IGAFImage implements IMaxSize implements
         }
     }
     
-    @:final inline private function updateTransformMatrix() : Void
+    final inline private function updateTransformMatrix() : Void
     {
         if (this._orientationChanged)
         {
@@ -311,7 +311,7 @@ class GAFImage extends Image implements IGAFImage implements IMaxSize implements
         return resultRect;
     }
     
-    @:final private function isEquivalent(a : Float, b : Float, epsilon : Float = 0.0001) : Bool
+    final private function isEquivalent(a : Float, b : Float, epsilon : Float = 0.0001) : Bool
     {
         return (a - epsilon < b) && (a + epsilon > b);
     }

@@ -21,7 +21,7 @@ class DisplayUtils
 	 *
 	 * @productversion Feathers 1.0.0
 	 */
-	@:extern inline
+	extern inline
 	public static function getDisplayObjectDepthFromStage(target:DisplayObject):Int
 	{
 		if(target.stage == null)

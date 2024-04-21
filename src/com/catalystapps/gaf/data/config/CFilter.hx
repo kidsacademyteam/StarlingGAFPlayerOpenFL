@@ -143,7 +143,7 @@ class CFilter
     {
         for (filterConfig in _filterConfigs)
         {
-            if (Std.is(filterConfig, CBlurFilterData))
+            if (Std.isOfType(filterConfig, CBlurFilterData))
             {
                 return cast(filterConfig, CBlurFilterData);
             }
@@ -162,7 +162,7 @@ class CFilter
     {
         for (filterConfig in _filterConfigs)
         {
-            if (Std.is(filterConfig, CColorMatrixFilterData))
+            if (Std.isOfType(filterConfig, CColorMatrixFilterData))
             {
                 return cast(filterConfig, CColorMatrixFilterData);
             }

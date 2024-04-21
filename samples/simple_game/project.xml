@@ -12,12 +12,16 @@
 	<window width="768" height="1024" unless="mobile" />
 	<window orientation="portrait" vsync="false" antialiasing="0" if="cpp" />
 	
+	
+	<set name="ZIP_LIB" if="false" />
+	<haxedef name="ZIP_LIB" if="ZIP_LIB" />
+	
 	<!-- classpath, haxe libs -->
 	<source path="src" />
 	<haxelib name="openfl" />
-	<haxelib name="zip" />
+	<haxelib name="zip" if="ZIP_LIB" />
 	<haxelib name="format" />
-	<haxelib name="starling" version="2.5.1" />
+	<haxelib name="starling" version="2.7.0" />
 	
 	<!-- additional -->
 	<classpath name="../../src/" />

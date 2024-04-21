@@ -591,7 +591,7 @@ class GAFScale9Image extends Sprite implements IValidating implements IGAFImage 
         }
     }
     
-    @:final inline private function updateTransformMatrix() : Void
+    final inline private function updateTransformMatrix() : Void
     {
         if (this._orientationChanged)
         {

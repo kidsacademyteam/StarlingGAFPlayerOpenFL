@@ -18,24 +18,31 @@ import com.catalystapps.gaf.data.tagfx.TAGFXSourcePNGURL;
 import com.catalystapps.gaf.sound.GAFSoundData;
 import com.catalystapps.gaf.utils.FileUtils;
 import com.catalystapps.gaf.utils.MathUtility;
-import flash.display3D.Context3DTextureFormat;
-import flash.errors.Error;
-import flash.events.ErrorEvent;
-import flash.events.Event;
-import flash.events.EventDispatcher;
-import flash.events.IOErrorEvent;
-import flash.geom.Point;
-import flash.media.Sound;
-import flash.net.URLLoader;
-import flash.net.URLLoaderDataFormat;
-import flash.net.URLRequest;
 import haxe.Timer;
+import openfl.display3D.Context3DTextureFormat;
+import openfl.errors.Error;
+import openfl.events.ErrorEvent;
+import openfl.events.Event;
+import openfl.events.EventDispatcher;
+import openfl.events.IOErrorEvent;
+import openfl.geom.Point;
+import openfl.media.Sound;
+import openfl.net.URLLoader;
+import openfl.net.URLLoaderDataFormat;
+import openfl.net.URLRequest;
 import openfl.utils.ByteArray;
+import openfl.utils.CompressionAlgorithm;
 import openfl.utils.Endian;
 import starling.core.Starling;
+
+#if ZIP_LIB
 import zip.Zip;
 import zip.ZipEntry;
 import zip.ZipReader;
+#else
+import haxe.zip.Entry as ZipEntry;
+import haxe.zip.Reader as ZipReader;
+#end
 
 /** Dispatched when convertation completed */
 @:meta(Event(name="complete",type="flash.events.Event"))
@@ -204,13 +211,18 @@ class ZipToGAFAssetConverter extends EventDispatcher
             this._gafBundle.name = this._id;
         }
         
-        //if (Std.is(data, ByteArray))
-		if(data != null && (try cast(data, ByteArray) catch(e:Dynamic) null) != null)
+        //if (Std.isOfType(data, ByteArray))
+		var byteArray:ByteArray;
+		if(data != null && (byteArray = data) != null)
         {
 			var zipOk:Bool = true;
 			try
 			{
-				_zip = new ZipReader(cast(data, ByteArray));
+				#if ZIP_LIB
+				_zip = new ZipReader(byteArray);
+				#else
+				_zip = new ZipReader(new haxe.io.BytesInput(haxe.io.Bytes.ofData(byteArray)));
+				#end
 			}
 			catch (e:Dynamic)
 			{
@@ -225,10 +237,19 @@ class ZipToGAFAssetConverter extends EventDispatcher
 				{
 					var entry:ZipEntry;
 					_zipLoader = new Map();
+					
+					#if ZIP_LIB
 					while ((entry = _zip.getNextEntry()) != null)
 					{
 						_zipLoader.set(entry.fileName, entry);
 					}
+					#else
+					var entries = _zip.read();
+					for (entry in entries)
+					{
+						_zipLoader.set(entry.fileName, entry);
+					}
+					#end
 				}
 				catch (e:Dynamic)
 				{
@@ -236,7 +257,7 @@ class ZipToGAFAssetConverter extends EventDispatcher
 					onParseError();
 					zipOk = false;
 				}
-			}			
+			}
 			
 			if (zipOk)
 			{
@@ -249,11 +270,11 @@ class ZipToGAFAssetConverter extends EventDispatcher
             }
         }
 /*
-        else if (data != null && (Std.is(data, Array) || Type.getClassName(data) == "flash.filesystem::File"))
+        else if (data != null && (Std.isOfType(data, Array) || Type.getClassName(data) == "flash.filesystem::File"))
         {
             this._gafAssetsConfigURLs = [];
             
-            if (Std.is(data, Array))
+            if (Std.isOfType(data, Array))
             {
 				// AS3HX WARNING could not determine type for var: file exp: EIdent(data) type: Dynamic /
                 for (file in data)
@@ -276,7 +297,7 @@ class ZipToGAFAssetConverter extends EventDispatcher
             }
         }
 */
-        //else if (Std.is(data, Dynamic) && data.configs && data.atlases)
+        //else if (Std.isOfType(data, Dynamic) && data.configs && data.atlases)
         else if (data != null && (Reflect.hasField(data, "configs") && Reflect.hasField(data, "atlases")))
         {
             this.parseObject(data);
@@ -530,7 +551,10 @@ class ZipToGAFAssetConverter extends EventDispatcher
 			
 			if (this._zip != null)
 			{
+				#if ZIP_LIB
 				this._zip.clean();
+				#end
+				
 				this._zip = null;
 			}
 		}
@@ -579,7 +603,11 @@ class ZipToGAFAssetConverter extends EventDispatcher
 		for (path in zipLoader.keys())
 		{
 			fileName = path;
+			#if ZIP_LIB
 			zipFile = Zip.getBytes(zipLoader.get(path));
+			#else
+			zipFile = getBytes(zipLoader.get(path));
+			#end
 			zipFile.endian = Endian.BIG_ENDIAN;
             
             switch (fileName.substr(fileName.toLowerCase().lastIndexOf(".")))
@@ -620,7 +648,7 @@ class ZipToGAFAssetConverter extends EventDispatcher
         var configSource : Dynamic = this._gafAssetConfigSources.get(configID);
         var gafAssetID : String = this.getAssetId(this._gafAssetsIDs[this._currentConfigIndex]);
         
-        //if (Std.is(configSource, ByteArray))
+        //if (Std.isOfType(configSource, ByteArray))
         if (cast(configSource, ByteArray) != null)
         {
             var converter : BinGAFAssetConfigConverter = new BinGAFAssetConfigConverter(gafAssetID, cast(configSource, ByteArray));
@@ -983,4 +1011,14 @@ class ZipToGAFAssetConverter extends EventDispatcher
         this._ignoreSounds = ignoreSounds;
         return ignoreSounds;
     }
+	
+	inline
+	function getBytes(entry:ZipEntry):ByteArray 
+	{
+		var data:ByteArray = entry.data.getData();
+		if(entry.compressed)
+			data.uncompress(CompressionAlgorithm.DEFLATE);
+		
+		return data;
+	}
 }

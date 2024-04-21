@@ -49,7 +49,7 @@ class GAFTexture implements IGAFTexture
     //--------------------------------------------------------------------------
     public function copyFrom(newTexture : IGAFTexture) : Void
     {
-        if (Std.is(newTexture, GAFTexture))
+        if (Std.isOfType(newTexture, GAFTexture))
         {
             this._id = newTexture.id;
             this._texture = newTexture.texture;

@@ -91,7 +91,7 @@ class GAFScale9Texture implements IGAFTexture
     //--------------------------------------------------------------------------
     public function copyFrom(_newTexture : IGAFTexture) : Void
     {
-        if (Std.is(_newTexture, GAFScale9Texture))
+        if (Std.isOfType(_newTexture, GAFScale9Texture))
         {
 			var newTexture = cast(_newTexture, GAFScale9Texture);
 			

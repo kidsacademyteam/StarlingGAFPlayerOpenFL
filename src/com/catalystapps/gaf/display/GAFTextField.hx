@@ -243,7 +243,7 @@ class GAFTextField extends Sprite implements IGAFDebug implements IMaxSize imple
     public function invalidateSize() : Void
     {
 /*
-        if (this.textEditor != null && Std.is(this.textEditor, TextFieldTextEditor))
+        if (this.textEditor != null && Std.isOfType(this.textEditor, TextFieldTextEditor))
         {
             cast(this.textEditor, TextFieldTextEditor).invalidate(INVALIDATION_FLAG_SIZE);
         }
@@ -344,7 +344,7 @@ class GAFTextField extends Sprite implements IGAFDebug implements IMaxSize imple
 /*
         if (this.textEditor)
         {
-            if (Std.is(this.textEditor, GAFTextFieldTextEditor))
+            if (Std.isOfType(this.textEditor, GAFTextFieldTextEditor))
             {
                 cast(this.textEditor, GAFTextFieldTextEditor).setFilterConfig(this._filterConfig, this._filterScale);
             }
@@ -411,7 +411,7 @@ class GAFTextField extends Sprite implements IGAFDebug implements IMaxSize imple
     }
     
     /** @private */
-    @:final inline private function updateTransformMatrix() : Void
+    final inline private function updateTransformMatrix() : Void
     {
         if (this._orientationChanged)
         {

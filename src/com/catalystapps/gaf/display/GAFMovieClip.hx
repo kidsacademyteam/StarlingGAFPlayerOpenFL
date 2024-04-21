@@ -614,10 +614,10 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             for (i in 0...l)
             {
                 //child = try cast(this.getChildAt(i), DisplayObjectContainer) catch(e:Dynamic) null;
-				if (Std.is(this.getChildAt(i), DisplayObjectContainer))
+				if (Std.isOfType(this.getChildAt(i), DisplayObjectContainer))
 				{
 					child = cast(this.getChildAt(i), DisplayObjectContainer);
-					if (Std.is(child, GAFMovieClip))
+					if (Std.isOfType(child, GAFMovieClip))
 					{
 						childMC = cast(child, GAFMovieClip);
 						if (calledByUser)
@@ -651,10 +651,10 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             for (i in 0 ... this.numChildren)
             {
                 //child = try cast(this.getChildAt(i), DisplayObjectContainer) catch(e:Dynamic) null;
-				if (Std.is(this.getChildAt(i), DisplayObjectContainer))
+				if (Std.isOfType(this.getChildAt(i), DisplayObjectContainer))
 				{
 					child = cast(this.getChildAt(i), DisplayObjectContainer);
-					if (Std.is(child, GAFMovieClip))
+					if (Std.isOfType(child, GAFMovieClip))
 					{
 						//childMC = try cast(child, GAFMovieClip) catch(e:Dynamic) null;
 						childMC = cast(child, GAFMovieClip);
@@ -776,14 +776,14 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             }
         }
 		*/
-		if (Std.is(_frame, Int) && ((frame = _frame) > 0))
+		if (Std.isOfType(_frame, Int) && ((frame = _frame) > 0))
 		{
 			if (frame > this._totalFrames)
 			{
 				frame = this._totalFrames;
 			}
 		}
-        else if (Std.is(_frame, String))
+        else if (Std.isOfType(_frame, String))
         {
             var label : String = _frame;
             frame = this._config.animationSequences.getStartFrameNo(label);
@@ -869,7 +869,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
                 {
                     objectPivotMatrix = getTransformMatrix(displayObject, HELPER_MATRIX);
 					
-					if (Std.is(displayObject, GAFMovieClip))
+					if (Std.isOfType(displayObject, GAFMovieClip))
 					{
 						mc = cast(displayObject, GAFMovieClip);
 					}
@@ -939,7 +939,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
                             mc._play(true);
                         }
                         
-                        if (DebugUtility.RENDERING_DEBUG && Std.is(displayObject, IGAFDebug))
+                        if (DebugUtility.RENDERING_DEBUG && Std.isOfType(displayObject, IGAFDebug))
                         {
                             var colors : Array<Int> = DebugUtility.getRenderingDifficultyColor(
                                     instance, this._alphaLessMax, this._masked, this._hasFilter
@@ -965,7 +965,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
                             }
                             
                             //mc = try cast(maskObject, GAFMovieClip) catch(e:Dynamic) null;
-                            if (Std.is(maskObject, GAFMovieClip))
+                            if (Std.isOfType(maskObject, GAFMovieClip))
 							{
 								mc = cast(maskObject, GAFMovieClip);
 							}
@@ -1084,7 +1084,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             {
                 case CAnimationObject.TYPE_TEXTURE:
                     var texture : IGAFTexture = textureAtlas.getTexture(animationObjectConfig.regionID);
-                    if (Std.is(texture, GAFScale9Texture) && !animationObjectConfig.mask) // GAFScale9Image doesn't work as mask
+                    if (Std.isOfType(texture, GAFScale9Texture) && !animationObjectConfig.mask) // GAFScale9Image doesn't work as mask
 					{
                         displayObject = new GAFScale9Image(cast(texture, GAFScale9Texture));
                     }
@@ -1103,7 +1103,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
                     displayObject = new GAFMovieClip(timeline, Std.int(this.fps), false);
             }
             
-            if (animationObjectConfig.maxSize != null && Std.is(displayObject, IMaxSize))
+            if (animationObjectConfig.maxSize != null && Std.isOfType(displayObject, IMaxSize))
             {
                 var maxSize : Point = new Point(
                 animationObjectConfig.maxSize.x * this._scale, 
@@ -1147,12 +1147,12 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             this._displayObjectsDictionary.set(id, displayObject);
             //this._displayObjectsVector[_displayObjectsVector.length] = try cast(displayObject, IGAFDisplayObject) catch(e:Dynamic) null;
             this._displayObjectsVector[_displayObjectsVector.length] = cast(displayObject, IGAFDisplayObject);
-            if (Std.is(displayObject, IGAFImage))
+            if (Std.isOfType(displayObject, IGAFImage))
             {
                 //this._imagesVector[_imagesVector.length] = try cast(displayObject, IGAFImage) catch(e:Dynamic) null;
                 this._imagesVector[_imagesVector.length] = cast(displayObject, IGAFImage);
             }
-            else if (Std.is(displayObject, GAFMovieClip))
+            else if (Std.isOfType(displayObject, GAFMovieClip))
             {
                 //this._mcVector[_mcVector.length] = try cast(displayObject, GAFMovieClip) catch(e:Dynamic) null;
                 this._mcVector[_mcVector.length] = cast(displayObject, GAFMovieClip);
@@ -1223,7 +1223,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
         }
     }
     
-    @:final inline private function updateTransformMatrix() : Void
+    final inline private function updateTransformMatrix() : Void
     {
         if (this._orientationChanged)
         {
@@ -1247,11 +1247,11 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
             var key : String;
             var instanceName : String;
             var child : DisplayObject = this.getChildAt(index);
-            if (Std.is(child, IGAFDisplayObject))
+            if (Std.isOfType(child, IGAFDisplayObject))
             {
                 //var id : Int = this._mcVector.indexOf(try cast(child, GAFMovieClip) catch(e:Dynamic) null);
                 var id : Int = -1;
-				if (Std.is(child, GAFMovieClip))
+				if (Std.isOfType(child, GAFMovieClip))
 				{
 					id = this._mcVector.indexOf(cast child);
 				}
@@ -1261,7 +1261,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
                 }
                 //id = this._imagesVector.indexOf(try cast(child, IGAFImage) catch(e:Dynamic) null);
                 id = -1;
-				if (Std.is(child, IGAFImage))
+				if (Std.isOfType(child, IGAFImage))
 				{
 					id = this._imagesVector.indexOf(cast child);
 				}
@@ -1399,7 +1399,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
         }
         catch (error : Dynamic)
         {
-            if (Std.is(error, IllegalOperationError) && (Std.string(error.message)).indexOf("not possible to stack filters") != -1)
+            if (Std.isOfType(error, IllegalOperationError) && (Std.string(error.message)).indexOf("not possible to stack filters") != -1)
             {
                 if (this.hasEventListener(ErrorEvent.ERROR))
                 {
@@ -1746,7 +1746,7 @@ class GAFMovieClip extends Sprite implements IAnimatable implements IGAFDisplayO
     //
     //--------------------------------------------------------------------------
     
-	@:extern inline
+	extern inline
     private static function getTransformMatrix(displayObject : IGAFDisplayObject, matrix : Matrix) : Matrix
     {
         matrix.copyFrom(displayObject.pivotMatrix);

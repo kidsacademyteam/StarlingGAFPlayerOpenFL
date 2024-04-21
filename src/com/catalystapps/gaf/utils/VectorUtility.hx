@@ -11,7 +11,7 @@ import openfl.Vector;
  */
 class VectorUtility
 {
-	@:extern inline
+	extern inline
     public static function fillMatrix(v : Vector<Float>,
             a00 : Float, a01 : Float, a02 : Float, a03 : Float, a04 : Float,
             a10 : Float, a11 : Float, a12 : Float, a13 : Float, a14 : Float,
@@ -24,7 +24,7 @@ class VectorUtility
         v[15] = a30; v[16] = a31; v[17] = a32; v[18] = a33; v[19] = a34;
     }
     
-	@:extern inline
+	extern inline
     public static function copyMatrix(source : Vector<Float>, dest : Vector<Float>) : Void
     {
         var l : Int = dest.length;

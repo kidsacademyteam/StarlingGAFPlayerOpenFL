@@ -4,7 +4,7 @@ package com.catalystapps.gaf.utils;
 /**
  * Class for copyArray
  */
-@:final class ClassForCopyArray
+final class ClassForCopyArray
 {
     /**
 	 * @private

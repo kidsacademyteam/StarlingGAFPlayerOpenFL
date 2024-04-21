@@ -79,7 +79,7 @@ class GAFFilterChain extends FilterChain
         {
             currentFilterConfig = _filterData.filterConfigs[i];
             
-            if (Std.is(currentFilterConfig, CBlurFilterData))
+            if (Std.isOfType(currentFilterConfig, CBlurFilterData))
             {
 				var blurFilterData : CBlurFilterData = cast(currentFilterConfig, CBlurFilterData);
                 if (blurFilterData.distance != 0)
@@ -102,7 +102,7 @@ class GAFFilterChain extends FilterChain
                     addFilter(blurFilter);
                 }
             }
-            else if (Std.is(currentFilterConfig, CColorMatrixFilterData))
+            else if (Std.isOfType(currentFilterConfig, CColorMatrixFilterData))
             {
                 colorMatrixFilter = new ColorMatrixFilter();
                 colorMatrixFilter.matrix = cast(currentFilterConfig, CColorMatrixFilterData).matrix;
@@ -125,7 +125,7 @@ class GAFFilterChain extends FilterChain
         {
             currentFilterConfig = _filterData.filterConfigs[i];
             
-            if (Std.is(currentFilterConfig, CBlurFilterData))
+            if (Std.isOfType(currentFilterConfig, CBlurFilterData))
             {
 				var blurFilterData : CBlurFilterData = cast(currentFilterConfig, CBlurFilterData);
 				if (blurFilterData.angle != 0) // DropShadowFilter
@@ -160,7 +160,7 @@ class GAFFilterChain extends FilterChain
 					addFilter(blurFilter);
 				}
             }
-            else if (Std.is(currentFilterConfig, CColorMatrixFilterData))
+            else if (Std.isOfType(currentFilterConfig, CColorMatrixFilterData))
             {
                 colorMatrixFilter = new ColorMatrixFilter();
                 colorMatrixFilter.matrix = cast(currentFilterConfig, CColorMatrixFilterData).matrix;

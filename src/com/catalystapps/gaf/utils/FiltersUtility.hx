@@ -21,7 +21,7 @@ class FiltersUtility
     public static function getNativeFilter(data : ICFilterData, scale : Float = 1) : BitmapFilter
     {
         var nativeFilter : BitmapFilter;
-        if (Std.is(data, CBlurFilterData))
+        if (Std.isOfType(data, CBlurFilterData))
         {
             var blurFilterData : CBlurFilterData = cast(data, CBlurFilterData);
             if (blurFilterData.angle != 0) // DropShadowFilter

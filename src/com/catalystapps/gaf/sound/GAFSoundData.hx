@@ -93,7 +93,7 @@ class GAFSoundData
 		{
 			for (sound in this._sounds)
 			{
-				if (Std.is(sound, Sound))
+				if (Std.isOfType(sound, Sound))
 				{
 					cast(sound, Sound).close();
 				}

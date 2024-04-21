@@ -19,12 +19,10 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl&#xA;lime=6.4.0&#xA;zip&#xA;starling=1.8.14&#xA;tools=6.4.0&#xA;no-compilation&#xA;openfl-flash&#xA;web&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--macro openfl._internal.utils.ExtraParams.include()&#xA;--macro lime.Lib.extraParams()&#xA;--macro zip.Macro.init()&#xA;-swf-version 17" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

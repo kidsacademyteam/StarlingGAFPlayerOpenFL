@@ -26,7 +26,7 @@ class GAFStencilMaskStyle extends MeshStyle
     
     override public function copyFrom(meshStyle : MeshStyle) : Void
     {
-		if (meshStyle != null && Std.is(meshStyle, GAFStencilMaskStyle))
+		if (meshStyle != null && Std.isOfType(meshStyle, GAFStencilMaskStyle))
 		{
 			var otherStyle : GAFStencilMaskStyle = cast(meshStyle, GAFStencilMaskStyle);
 			if (otherStyle != null)

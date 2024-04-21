@@ -396,25 +396,25 @@ class GAFGFXData extends EventDispatcher
     }
 	
 //*
-	@:extern inline
+	extern inline
 	static function mapToConvert(value:Float):Int
 	{
 		return Math.round(value * 100);
 	}
 	
-	@:extern inline
+	extern inline
 	static function mapFromConvert(value:Int):Float
 	{
 		return value / 100;
 	}
 /*/
-	@:extern inline
+	extern inline
 	static function mapToConvert(value:Float):String
 	{
 		return Std.string(value);
 	}
 	
-	@:extern inline
+	extern inline
 	static function mapFromConvert(value:String):Float
 	{
 		return Std.parseFloat(value);

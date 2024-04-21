@@ -19,7 +19,7 @@ import starling.core.Starling;
  *
  * @productversion Feathers 1.0.0
  */
-@:final class ValidationQueue implements IAnimatable
+final class ValidationQueue implements IAnimatable
 {
     public var isValidating(get, never) : Bool;
 
