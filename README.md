@@ -13,8 +13,3 @@ GAFTextField uses OpenFL TextField and filters to behave similar to flash versio
 For using Starling TextField and filters set GAFTextField.usePreciseFlashTextField = false; (could have different visual appearence)
 
 Not implemented ATF support in GAF, Sound not checked, but should work
-
-# Dependencies
-zip library https://github.com/starburst997/haxe-zip
-
-haxe format library (needed for zip library)
