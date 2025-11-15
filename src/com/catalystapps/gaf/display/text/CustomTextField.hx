@@ -17,7 +17,7 @@ class CustomTextField
 	private var _csf : Float = Math.NaN;
 	
 	public var text(never, set) : String;
-	public var color(never, set) : Int;
+	public var color(never, set) : UInt;
 	public var hAlign(get, set):String;
 	
 	public function new(parent : Sprite, config : CTextFieldObject, scale : Float, csf : Float) 
@@ -55,7 +55,7 @@ class CustomTextField
 		return value;
 	}
 	
-	function set_color(value : Int) : Int
+	function set_color(value : UInt) : UInt
 	{
 		return value;
 	}

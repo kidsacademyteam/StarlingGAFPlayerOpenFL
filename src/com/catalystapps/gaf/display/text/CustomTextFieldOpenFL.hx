@@ -111,10 +111,8 @@ class CustomTextFieldOpenFL extends CustomTextField
 		return value;
 	}
 	
-	override function set_color(value : Int) : Int
-	{
-		if (textField.textColor != value)
-		{
+	override function set_color(value:UInt):UInt {
+		if (textField.textColor != value) {
 			textFormat.color = value;
 			textField.textColor = value;
 			drawTextField();
@@ -123,12 +121,8 @@ class CustomTextFieldOpenFL extends CustomTextField
 		return value;
 	}
 	
-    override function set_hAlign(value:String):String
-    {
-		if (textFormat.align != value
-		&& (value == TextFormatAlign.CENTER || value == TextFormatAlign.LEFT || value == TextFormatAlign.RIGHT)
-		)
-		{
+    override function set_hAlign(value:String):String {
+		if (textFormat.align != value && (value == TextFormatAlign.CENTER || value == TextFormatAlign.LEFT || value == TextFormatAlign.RIGHT)) {
 			textFormat.align = value;
 			textField.defaultTextFormat = textFormat;
 			textField.setTextFormat(textFormat);
